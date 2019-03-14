@@ -14,6 +14,7 @@ import com.app.bean.Gender;
 import com.app.bean.Student;
 import com.app.dao.StudentDAO;
 import com.app.dao.StudentDAOImpl;
+import com.app.exceptions.DuplicateIdException;
 
 @WebServlet("/controller")
 public class UniversityController extends HttpServlet {
@@ -53,12 +54,23 @@ public class UniversityController extends HttpServlet {
 																	  // MALE , Male				
 			
 			
-			boolean status = dao.registerStudent(s);
-			
-			if(status) {
+			boolean status;
+			try {
+				status = dao.registerStudent(s);
 				view = request.getRequestDispatcher("HomePage.jsp");
 				view.forward(request, response);
+				
+			} catch (DuplicateIdException e) {
+				
+				request.setAttribute("errormessage", e.getMessage());
+				
+				view = request.getRequestDispatcher("Registration.jsp");
+				view.forward(request, response);
+				
+				
 			}
+			
+			
 			
 		}
 
