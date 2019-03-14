@@ -10,13 +10,14 @@ import java.util.List;
 
 import com.app.bean.Gender;
 import com.app.bean.Student;
+import com.app.exceptions.DuplicateIdException;
 
 public class StudentDAOImpl implements StudentDAO {
 
 	ConnectionFactory factory = new ConnectionFactory();
 	
 	
-	public boolean registerStudent(Student s) {
+	public boolean registerStudent(Student s) throws DuplicateIdException {
 
 		// insert query ...
 		String query = "insert into university(uno,name,gender) values(?,?,?)";
@@ -36,8 +37,13 @@ public class StudentDAOImpl implements StudentDAO {
 			}
 
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			
+			System.out.println(e.getMessage());
+			
+			throw new DuplicateIdException("Duplicate uno :" + s.getUno() + " is not allowed !!");
+			
+			
+			
 		} finally {
 			try {
 				conn.close();
