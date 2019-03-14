@@ -1,24 +1,37 @@
 package com.app.dao;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.Properties;
 
 public class ConnectionFactory {
 
-	// JDBC Code
-		private static final String dbdriver = "com.mysql.jdbc.Driver";
-		private static final String url = "jdbc:mysql://localhost:3306/testdatabase";
-		private static final String username = "root";
-		private static final String password = "root";
-		private static java.sql.Connection conn = null;
-	
+	private static Properties prop = new Properties();// key : value pairs
+	private static String propertiesfname = "dbconfig.properties";
+	private static java.sql.Connection conn = null;
+
+	static {
+		InputStream is = ConnectionFactory.class.getClassLoader().getResourceAsStream(propertiesfname);
+
+		if (is != null) {
+			try {
+				prop.load(is);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+
 	public Connection getConnection() {
-	
+
 		try {
 
-			Class.forName(dbdriver);
-			conn = DriverManager.getConnection(url, username, password);// get db connection
+			Class.forName(prop.getProperty("dbdriver"));
+			conn = DriverManager.getConnection(prop.getProperty("url"), prop.getProperty("username"), prop.getProperty("password"));// get db connection
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -27,9 +40,8 @@ public class ConnectionFactory {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
+
 		return conn;
 	}
-	
+
 }
