@@ -94,4 +94,10 @@ public class StudentDAOImpl implements StudentDAO {
 		return students;
 	}
 
+
+	public void removeStudent(int id) throws DuplicateIdException {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

@@ -9,4 +9,5 @@ public interface StudentDAO {
 
 	boolean registerStudent(Student s) throws DuplicateIdException;
 	List<Student> getAllStudents();
+	void removeStudent(int id) throws DuplicateIdException;
 }
