@@ -5,6 +5,7 @@ public class Student {
 	private String uno;
 	private String name;
 	private Gender gender;
+	private String emailAddress;
 	
 	
 	public Student(String uno, String name, Gender gender) {
@@ -32,6 +33,15 @@ public class Student {
 	public void setGender(Gender gender) {
 		this.gender = gender;
 	}
+
+	public String getEmailAddress() {
+		return emailAddress;
+	}
+
+	public void setEmailAddress(String emailAddress) {
+		this.emailAddress = emailAddress;
+	}
+	
 	
 	
 }
