@@ -96,8 +96,8 @@ public class StudentDAOImpl implements StudentDAO {
 
 
 	public void deleteStudent(int id) throws DuplicateIdException {
-		// TODO Auto-generated method stub
 		
+		System.out.println("Here we can write a query to delete the student using id");
 	}
 
 }
