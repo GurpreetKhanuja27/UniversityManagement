@@ -32,16 +32,6 @@ public class Student {
 	public void setGender(Gender gender) {
 		this.gender = gender;
 	}
-<<<<<<< .mine
-
-	public String getEmailAddress() {
-		return emailAddress;
-	}
-
-	public void setEmailAddress(String emailAddress) {
-		this.emailAddress = emailAddress;
-	}
-=======
 
 	public String getEmail() {
 		return email;
@@ -50,14 +40,6 @@ public class Student {
 	public void setEmail(String email) {
 		this.email = email;
 	}
->>>>>>> .theirs
-	
-	
-<<<<<<< .mine
 	
 
-=======
-	
-	
->>>>>>> .theirs
 }
