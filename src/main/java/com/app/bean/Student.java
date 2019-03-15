@@ -5,7 +5,7 @@ public class Student {
 	private String uno;
 	private String name;
 	private Gender gender;
-	
+	private String email;
 	
 	public Student(String uno, String name, Gender gender) {
 		super();
@@ -32,6 +32,16 @@ public class Student {
 	public void setGender(Gender gender) {
 		this.gender = gender;
 	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	
+	
 	
 	
 }
