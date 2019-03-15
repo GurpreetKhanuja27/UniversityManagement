@@ -96,7 +96,9 @@ public class StudentDAOImpl implements StudentDAO {
 
 
 	public void deleteStudent(int id) throws DuplicateIdException {
-		
+		Connection conn = factory.getConnection();
+		String query = "delete from university where uno =" + id;
+
 		System.out.println("Here we can write a query to delete the student using id");
 	}
 
