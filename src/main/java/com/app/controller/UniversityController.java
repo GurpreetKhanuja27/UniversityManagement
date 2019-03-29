@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
+
 import com.app.bean.Gender;
 import com.app.bean.Student;
 import com.app.dao.StudentDAO;
@@ -19,17 +21,22 @@ import com.app.exceptions.DuplicateIdException;
 @WebServlet("/controller")
 public class UniversityController extends HttpServlet {
 	
+	Logger logger = Logger.getLogger(UniversityController.class);
+	
 	StudentDAO dao = new StudentDAOImpl();
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
 		String action = request.getParameter("action");
-
+		
+		logger.info(" Locale " + request.getLocale());
+		logger.info(" Host " + request.getHeader("Host"));
+		
 		RequestDispatcher view = null;
 
 		if (action.equals("register")) {
-
+			logger.info("Request for registering a new student");
 			view = request.getRequestDispatcher("Registration.jsp");
 			view.forward(request, response);
 
@@ -45,7 +52,7 @@ public class UniversityController extends HttpServlet {
 			view.forward(request, response);
 
 		} else if (action.equals("registernewstudent")) {
-
+			logger.info("Received details for registering a new student");
 			String uno = request.getParameter("uno");
 			String name = request.getParameter("Name");
 			String gender = request.getParameter("gender").toUpperCase();
@@ -61,6 +68,8 @@ public class UniversityController extends HttpServlet {
 				view.forward(request, response);
 				
 			} catch (DuplicateIdException e) {
+				
+				logger.error(e.getMessage());
 				
 				request.setAttribute("errormessage", e.getMessage());
 				

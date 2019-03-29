@@ -8,12 +8,15 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.log4j.Logger;
+
 import com.app.bean.Gender;
 import com.app.bean.Student;
 import com.app.exceptions.DuplicateIdException;
 
 public class StudentDAOImpl implements StudentDAO {
 
+	Logger logger = Logger.getLogger(StudentDAOImpl.class);
 	ConnectionFactory factory = new ConnectionFactory();
 	
 	
@@ -32,13 +35,13 @@ public class StudentDAOImpl implements StudentDAO {
 			int count = stmt.executeUpdate();
 
 			if (count == 1) {
-				System.out.println(count + "inserted record successfully");
+				logger.info(count + " record inserted successfully !");
 				return true;
 			}
 
 		} catch (SQLException e) {
 			
-			System.out.println(e.getMessage());
+			logger.error(e.getMessage());
 			
 			throw new DuplicateIdException("Duplicate uno :" + s.getUno() + " is not allowed !!");
 			
@@ -46,6 +49,7 @@ public class StudentDAOImpl implements StudentDAO {
 			
 		} finally {
 			try {
+				logger.info("Connection closed !");
 				conn.close();
 			} catch (SQLException e1) {
 				// TODO Auto-generated catch block
